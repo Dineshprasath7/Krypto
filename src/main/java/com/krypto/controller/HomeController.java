@@ -10,4 +10,12 @@ public class HomeController {
     public String Home() {
         return "Welcome to Krypto";
     }
+
+    @GetMapping("/secure")
+    public String  secure(){
+    return "SECURE";
 }
+
+}
+
+
