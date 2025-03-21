@@ -29,6 +29,7 @@ public class ForgotPasswordImpl implements ForgotPasswordService {
     public ForgotPasswordToken findById(String id) {
         Optional<ForgotPasswordToken> token=forgotPasswordRepository.findById(id);
         return token.orElse(null);
+
     }
 
     @Override
