@@ -8,8 +8,8 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@Entity
 @Data
+@Entity
 public class Order {
 @Id
 @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,5 +26,6 @@ private LocalDateTime timestamp=LocalDateTime.now();
 private OrderStatus status;
 @OneToOne(mappedBy = "order",cascade = CascadeType.ALL)
 private OrderItem orderItem;
+
 
 }
