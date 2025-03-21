@@ -6,6 +6,7 @@ import com.krypto.model.Order;
 import com.krypto.model.Wallet;
 import com.krypto.model.WalletTransaction;
 import com.krypto.service.UserService;
+import com.krypto.service.OrderService;
 import com.krypto.service.WalletService;
 import com.krypto.service.WalletServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ public class WalletController {
     @Autowired
     private WalletService walletService;
 
+    private OrderService orderService;
     private UserService userService;
 
     @GetMapping("/api/wallet")
@@ -32,7 +34,7 @@ public class WalletController {
         return new ResponseEntity<>(wallet, HttpStatus.ACCEPTED);
     }
 
-    @PostMapping("/api/wallet/${walletId}/transfer")
+    @PostMapping("/api/wallet/{walletId}/transfer")
     public ResponseEntity<Wallet>walletToWalletTransfer(
             @RequestHeader("Authorization") String jwt,
             @PathVariable Long walletId,
@@ -46,7 +48,7 @@ public class WalletController {
                 req.getAmount());
     return new ResponseEntity<>(wallet,HttpStatus.ACCEPTED);
     }
-    @PostMapping("/api/wallet/order/${orderId}/pay")
+    @PostMapping("/api/wallet/order/{orderId}/pay")
     public ResponseEntity<Wallet>payOrderPayment(
             @RequestHeader("Authorization") String jwt,
             @PathVariable Long walletId
