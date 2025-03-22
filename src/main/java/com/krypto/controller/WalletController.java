@@ -20,8 +20,9 @@ import org.springframework.web.bind.annotation.*;
 public class WalletController {
     @Autowired
     private WalletService walletService;
-
+    @Autowired
     private OrderService orderService;
+    @Autowired
     private UserService userService;
 
     @GetMapping("/api/wallet")
@@ -49,13 +50,11 @@ public class WalletController {
     return new ResponseEntity<>(wallet,HttpStatus.ACCEPTED);
     }
     @PostMapping("/api/wallet/order/{orderId}/pay")
-    public ResponseEntity<Wallet>payOrderPayment(
-            @RequestHeader("Authorization") String jwt,
-            @PathVariable Long walletId
-    )throws Exception {
+    public ResponseEntity<Wallet>payOrderPayment(@RequestHeader("Authorization") String jwt, @PathVariable Long orderId)throws Exception {
 
         User senderUser=userService.findUserProfileByJwt(jwt);
-      Order order=orderService.getOrderById(orderId);
+
+        Order order=orderService.getOrderById(orderId);
         Wallet wallet=walletService.payOrderPayment(order,senderUser);
         return new ResponseEntity<>(wallet,HttpStatus.ACCEPTED);
     }
