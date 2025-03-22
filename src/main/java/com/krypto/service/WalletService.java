@@ -6,9 +6,8 @@ import com.krypto.model.Wallet;
 public interface WalletService {
 
     Wallet getUserWallet(User user);
-
-    Wallet addBalance(Wallet wallet,Long money);
-    Wallet findWalletById(Long Id) throws Exception;
-    Wallet walletToWalletTransaction(User sender,Wallet receiverWallet,Long money) throws Exception;
-    Wallet payOrderPayment(Order order, User user);
+    public Wallet addBalance(Wallet wallet,Long money);
+    public Wallet findWalletById(Long Id) throws Exception;
+    public Wallet walletToWalletTransaction(User sender,Wallet receiverWallet,Long money) throws Exception;
+    public Wallet payOrderPayment(Order order, User user);
 }
