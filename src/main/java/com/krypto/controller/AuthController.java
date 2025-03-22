@@ -8,6 +8,7 @@ import com.krypto.response.AuthResponse;
 import com.krypto.service.CustomerUserDetailService;
 import com.krypto.service.EmailService;
 import com.krypto.service.TwoFactorOTPService;
+import com.krypto.service.WatchlistService;
 import com.krypto.utils.OtpUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,6 +34,9 @@ public class AuthController {
     @Autowired
     private TwoFactorOTPService twoFactorOTPService;
     @Autowired
+    private WatchlistService watchlistService;
+
+    @Autowired
     private EmailService emailService;
     @PostMapping("/signup")
     public ResponseEntity<AuthResponse>register(@RequestBody User user) throws Exception {
@@ -49,6 +53,7 @@ public class AuthController {
         newUser.setPassword(user.getPassword());
         User savedUser=userRepository.save((newUser));
 
+        watchlistService.createWatchList(savedUser);
 
 
         Authentication auth = new UsernamePasswordAuthenticationToken(
