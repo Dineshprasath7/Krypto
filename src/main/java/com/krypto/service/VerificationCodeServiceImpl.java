@@ -6,9 +6,10 @@ import com.krypto.model.VerificationCode;
 import com.krypto.repository.VerificationCodeRepository;
 import com.krypto.utils.OtpUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-
+@Service
 public class VerificationCodeServiceImpl implements VerificationCodeService {
 
     @Autowired

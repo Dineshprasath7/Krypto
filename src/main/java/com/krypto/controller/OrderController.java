@@ -1,6 +1,5 @@
 package com.krypto.controller;
 
-
 import com.krypto.domain.OrderType;
 import com.krypto.model.Coin;
 import com.krypto.model.Order;
@@ -36,7 +35,7 @@ public class OrderController {
     )throws Exception{
         User user = userService.findUserProfileByJwt(jwt);
         Coin coin = coinService.findById(req.getCoinId());
-        Order order=orderService.processOrder(coin,req.getQuantity(),req.getOrderType());
+        Order order=orderService.processOrder(coin,req.getQuantity(),req.getOrderType(),user);
         return ResponseEntity.ok(order);
     }
 
@@ -46,7 +45,7 @@ public class OrderController {
             @PathVariable("order_id") Long orderId)throws Exception{
         User user=userService.findUserProfileByJwt(jwt);
         Order order=orderService.getOrderById(orderId);
-        if(order.getUser().getId().equals(user.getId())){
+        if(order.getUser().getId()==(user.getId())){
             return ResponseEntity.ok(order);
         }
         else{

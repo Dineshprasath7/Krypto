@@ -27,7 +27,7 @@ public class WalletController {
     private OrderService orderService;
 
     @Autowired
-    private WalletTransaction walletTransactionService;
+    private WalletTransactionService walletTransactionService;
 
     @Autowired
     private PaymentService paymentService;
@@ -116,7 +116,7 @@ public class WalletController {
 
     }
 
-    @PutMapping("/api/wallet/deposit")
+    @PutMapping("/api/wallet/balance")
     public ResponseEntity<Wallet> addBalanceToWallet( @RequestHeader("Authorization")String jwt,@RequestParam (name = "order_Id") Long orderId,@RequestParam(name = "payment_id")String paymentId) throws Exception {
         User user =userService.findUserProfileByJwt(jwt);
         Wallet wallet = walletService.getUserWallet(user);
